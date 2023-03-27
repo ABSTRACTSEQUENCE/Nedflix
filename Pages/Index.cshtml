@@ -22,19 +22,22 @@
 	function GetCountries(){
 		//fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/filters", params).then(r=>return r.json())
 	}
-	function GetMovies(countryId){
+	async function GetMovies(countryId){
 		if(!Number.isInteger(countryId)) {console.log(countryId + " Is NaN"); return }
-		fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films?countries="+countryId+"&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1",
-		params).then(r => r.json()).then(j=>console.log(j))
+		let str = "https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=" + countryId + "&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1";
+		let mov;
+		return await fetch(str, params).then(r=>r.json()).then(r=>mov = r);
+		//console.log("GET: " + mov)
 	}
-
-	function PostMovies(moviesObj)
+	async function PostMovies(moviesObj)
 	{
-		fetch("/Index", {
+		console.log("Post: " + moviesObj)
+		await fetch("/Index", 
+		{
 			method:"POST",
-			headers: {"Content-Type" : "application/json",
-			body: JSON.stringify(moviesObj)}
+			headers: {"Content-Type" : "application/json"},
+			body: JSON.stringify(moviesObj)
 		})
 	}
-	PostMovies(GetMovies(1))
+	GetMovies(1).then(r=>PostMovies(r))
 </script>
