@@ -1,37 +1,18 @@
 ﻿@page
 @using static Nedflix.Pages.IndexModel;
 @model Nedflix.Pages.IndexModel
-@{
-	ViewData["Title"] = "Nedflix";
-}
+@{ViewData["Title"] = "Nedflix";}
+
+	@{
+		foreach(MovieList.Movie i in Model.mList.items)
+		{
+			<div>
+			<p>Название: @i.nameRu</p>
+			<p>Жанры: @foreach (var j in i.genres){ <p>@j.genre </p> }
+				</div>
+		}
+	}
+
 <script>
-	//let params
-	//let d // для дебага
-	////function GetCountries(){//fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/filters", params).then(r=>return r.json())}
-	//async function GetMovies(countryId){
-	//	params = {
-	//		method: "GET",
-	//		headers:
-	//		{
-	//			"Content-Type": "application/json",
-	//			"X-API-KEY": "c278dfaf-f118-4523-8b32-831ddded96b1"
-	//		}
-	//	}
-	//	if(!Number.isInteger(countryId)) {console.log(countryId + " Is NaN"); return }
-	//	let str = "https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=" + countryId + "&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1";
-	//	let mov;
-	//	return await fetch(str, params).then(r=>r.json()).then(r=>mov = r);
-	//	//console.log("GET: " + mov)
-	//}
-	//async function PostMovies(moviesObj)//400
-	//{
-	//	params = {
-	//		method: "POST",
-	//		//headers: { "Content-Type": "application/json;charset=utf-8" },
-	//		//body: JSON.stringify(moviesObj)
-	//	}
-	//	console.log("Post: " + moviesObj)
-	//	d = await fetch("/post", params);
-	//}
-	//GetMovies(1).then(r=>PostMovies(r))
+	//fetch("/").then(r=>r.json()).then((r)=>alert(r))
 </script>
